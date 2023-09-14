@@ -263,11 +263,11 @@ def geometric_model(*arg):
     skeO2 = skeO[hE:z1 - hE, hE:y1 - hE, hE:x1 - hE]
 
     CroppedSegm2D = ndimage.binary_dilation(CroppedSegm2).astype(CroppedSegm2.dtype)
-    sitk.WriteImage((sitk.GetImageFromArray(CroppedSegm2D * 255.)), "/Users/----/Desktop/CroppedSegm2D.nrrd")
+    sitk.WriteImage((sitk.GetImageFromArray(CroppedSegm2D * 255.)), "~/Desktop/CroppedSegm2D.nrrd")
     ske2D = ndimage.binary_dilation(ske2).astype(ske2.dtype)
-    sitk.WriteImage((sitk.GetImageFromArray(ske2D * 255.)), "/Users/----/Desktop/ske2D.nrrd")
+    sitk.WriteImage((sitk.GetImageFromArray(ske2D * 255.)), "~/Desktop/ske2D.nrrd")
     skeO2D = ndimage.binary_dilation(skeO2).astype(skeO2.dtype)
-    sitk.WriteImage((sitk.GetImageFromArray(skeO2D * 255.)), "/Users/----/Desktop/skeO2D.nrrd")
+    sitk.WriteImage((sitk.GetImageFromArray(skeO2D * 255.)), "~/Desktop/skeO2D.nrrd")
     """
 
 
@@ -486,7 +486,7 @@ def geometric_model(*arg):
                     NBranchNoTh = np.copy(NBranch)
                     NBranchNoTh[NBranch > 0] = Pctile75
                     FullStackModelNoTh = np.maximum(FullStackModelNoTh, NBranchNoTh)
-                    #sitk.WriteImage(sitk.GetImageFromArray(NBranchNoTh),"/Users/----/Desktop/NBranchNoTh_" + str(idx) + ".nrrd")
+                    #sitk.WriteImage(sitk.GetImageFromArray(NBranchNoTh),"~/Desktop/NBranchNoTh_" + str(idx) + ".nrrd")
 
                     ### Mimic a thrombosed artery (darker centerline) :
                     if diam_branch >= 5 :  ## <<-- '= 4' in v12
@@ -670,10 +670,10 @@ def geometric_model(*arg):
         MotherBranch = np.float32(ndimage.binary_dilation(MotherBranch))
         MotherBranch[Vascu_Arr == 0] = 0
 
-        #sitk.WriteImage(sitk.GetImageFromArray(FullStackModel),"/Users/----/Desktop/FullStackModel.nrrd")
-        #sitk.WriteImage(sitk.GetImageFromArray(Vascu_Arr),"/Users/----/Desktop/Vascu_Arr.nrrd")
-        #sitk.WriteImage(sitk.GetImageFromArray(CleanVascu),"/Users/----/Desktop/CleanVascu.nrrd")
-        #sitk.WriteImage(sitk.GetImageFromArray(ICA_Arr),"/Users/----/Desktop/ICA_Arr.nrrd")
+        #sitk.WriteImage(sitk.GetImageFromArray(FullStackModel),"~/Desktop/FullStackModel.nrrd")
+        #sitk.WriteImage(sitk.GetImageFromArray(Vascu_Arr),"~/Desktop/Vascu_Arr.nrrd")
+        #sitk.WriteImage(sitk.GetImageFromArray(CleanVascu),"~/Desktop/CleanVascu.nrrd")
+        #sitk.WriteImage(sitk.GetImageFromArray(ICA_Arr),"~/Desktop/ICA_Arr.nrrd")
         if np.isnan(ICA_Arr.sum()) == True:
             FullStackModel = np.zeros(Vascu_Arr.shape)
         return (CropCoords, CroppedGray, CroppedSegm, FullStackModel, CleanVascu, ICA_Arr, MotherBranch, Thromb)
