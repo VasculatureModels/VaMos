@@ -94,9 +94,9 @@ sed = 0   # <-- initialize ElasticDeform
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.nrrd',
+ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.seg.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-str", "--SplineStr", type=str, default='1',
 	help="Strength of the spline modification (10 to 30)")
