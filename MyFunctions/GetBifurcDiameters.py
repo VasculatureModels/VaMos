@@ -87,13 +87,13 @@ def GetChunkDiam(Coords_Branch, stackSegm):
 	#ndimage.binary_dilation(CroppedStackSegm, structure=kern).astype(CroppedStackSegm.dtype)
 
 	stackEnv = np.subtract(dilatedStack, stackSegm)
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnv*100)), '/Users/----/Desktop/stackEnv.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnv*100)), '~/Desktop/stackEnv.nrrd')
 
 	if stackEnv.max() > 1:
 		stackEnv[stackEnv > 1] = 1
 
 	stackEnvSkel = np.add(stackEnv, BranchSkel)
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnvSkel*100)), '/Users/----/Desktop/stackEnvSkel_' + str(idx) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnvSkel*100)), '~/Desktop/stackEnvSkel_' + str(idx) + '.nrrd')
 
 	sumStack = np.zeros(BranchSkel.shape)
 	radius = 1
@@ -104,7 +104,7 @@ def GetChunkDiam(Coords_Branch, stackSegm):
 		dilatedSkel = ndimage.binary_dilation(dilatedSkel).astype(dilatedSkel.dtype)
 		sumStack = np.add(stackEnv, dilatedSkel)
 		radius += 1
-		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_' + str(radius) + '.nrrd')
+		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_' + str(radius) + '.nrrd')
 
 	''' We want the dilated skeleton to reach the outer artery enveloppe on half (OR a third) the enveloppe's voxels '''
 	#Th = (np.pi * radius * len(Coords_Branch)) / 2
@@ -116,14 +116,14 @@ def GetChunkDiam(Coords_Branch, stackSegm):
 		dilatedSkel = ndimage.binary_dilation(dilatedSkel).astype(dilatedSkel.dtype)
 		sumStack = np.add(stackEnv, dilatedSkel)
 		radius += 1
-		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_' + str(radius) + '.nrrd')
+		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_' + str(radius) + '.nrrd')
 
 	if radius >= 4 :
 		radius -= 1
 	diameter = radius * 2
 	#diameter = int(radius * sqrt(2))
 
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack1_' + str(idx) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack1_' + str(idx) + '.nrrd')
 	"""
 	''' Nb of overlapping voxels : '''
 	zov, yov, xov = np.where(sumStack==2)
@@ -150,7 +150,7 @@ def GetChunkDiam(Coords_Branch, stackSegm):
 
 	#print('  Branch #%d, \tdiameter : %d, \tlength : %d' %(NN[idx], diameter, len(Coords_Branch)))
 
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_B' + str(BifNum) + '_N' + str(NN[idx]) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_B' + str(BifNum) + '_N' + str(NN[idx]) + '.nrrd')
 
 	return(diameter, sumStack)
 
@@ -188,14 +188,14 @@ def GetChunkDiam_v2(Coords_Branch, stackSegm, stackGray):
 
 	erodedStack = ndimage.binary_erosion(stackSegm).astype(stackSegm.dtype)
 	stackEnv = np.subtract(stackSegm, erodedStack)
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnv*100)), '/Users/----/Desktop/stackEnv.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnv*100)), '~/Desktop/stackEnv.nrrd')
 
 	#if stackEnv.max() > 1:
 	#	stackEnv[stackEnv > 1] = 1
 	stackEnv[stackEnv > 1] = 1
 
 	#stackEnvSkel = np.add(stackEnv, BranchSkel)
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnvSkel*100)), '/Users/----/Desktop/stackEnvSkel_' + str(idx) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackEnvSkel*100)), '~/Desktop/stackEnvSkel_' + str(idx) + '.nrrd')
 
 	sumStack = np.zeros(BranchSkel.shape)
 	radius = 1
@@ -206,7 +206,7 @@ def GetChunkDiam_v2(Coords_Branch, stackSegm, stackGray):
 		dilatedSkel = ndimage.binary_dilation(dilatedSkel).astype(dilatedSkel.dtype)
 		sumStack = np.add(stackEnv, dilatedSkel)
 		radius += 1
-		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_' + str(radius) + '.nrrd')
+		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_' + str(radius) + '.nrrd')
 
 	#radius -= 1
 	if radius >= 6 :
@@ -223,7 +223,7 @@ def GetChunkDiam_v2(Coords_Branch, stackSegm, stackGray):
 		dilatedSkel = ndimage.binary_dilation(dilatedSkel).astype(dilatedSkel.dtype)
 		sumStack = np.add(stackEnv, dilatedSkel)
 		radius += 1
-		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_' + str(radius) + '.nrrd')
+		#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_' + str(radius) + '.nrrd')
 
 	#radius -= 1
 	if radius >= 3 :
@@ -238,7 +238,7 @@ def GetChunkDiam_v2(Coords_Branch, stackSegm, stackGray):
 	MeanBranch = GrayBranch[np.nonzero(GrayBranch)].mean()
 	Pctile75 = (MeanBranch + MaxBranch) / 2.
 
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack1_' + str(idx) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack1_' + str(idx) + '.nrrd')
 	"""
 	''' Nb of overlapping voxels : '''
 	zov, yov, xov = np.where(sumStack==2)
@@ -265,7 +265,7 @@ def GetChunkDiam_v2(Coords_Branch, stackSegm, stackGray):
 
 	#print('  Branch #%d, \tdiameter : %d, \tlength : %d' %(NN[idx], diameter, len(Coords_Branch)))
 
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '/Users/----/Desktop/sumStack_B' + str(BifNum) + '_N' + str(NN[idx]) + '.nrrd')
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(sumStack*100)), '~/Desktop/sumStack_B' + str(BifNum) + '_N' + str(NN[idx]) + '.nrrd')
 
 	return(diameter, sumStack, MaxBranch, Pctile75)
 
