@@ -188,7 +188,7 @@ def noise_model(SplineModelTOF, CropOrig, SigmStart, ZoomIn):
 	"""
 	SplineModelTOF[SplineModelTOF > 0] = SplineModelTOF[SplineModelTOF > 0] + GM_noise[SplineModelTOF > 0]
 	GM_noise[SplineModelTOF > 0] = SplineModelTOF[SplineModelTOF > 0]
-	#sitk.WriteImage(sitk.GetImageFromArray(GM_noise),"/Users/----/Desktop/GM_noise.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(GM_noise),"~/Desktop/GM_noise.nrrd")
 
 	'''
 		Add up the arterial noise (specifically LF noise onto the arteries) : 
