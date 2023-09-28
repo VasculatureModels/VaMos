@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -46,6 +46,27 @@ import scipy
 
 
 filename = sys.argv[1]
+
+""" True ICAs : """
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_107_F5/AIC_17_0035/AIC_17_0035_0.4.seg.nrrd"   ### near sphere (R = 0.74)
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_118_F7/AIC_07_0294/AIC_07_0294_0.4.seg.nrrd"   ### R = 0.57
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_105_F11/AIC_05_0047/AIC_05_0047_0.4.seg.nrrd"  ### R = 0.59
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_121_F9/AIC_19_0044/AIC_19_0044_0.4.seg.nrrd"   ### high aberrations - elongated (R = 0.37)
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_7_F6/AIC_16_0003/AIC_16_0003_0.4.seg.nrrd"     ### near sphere (R = 0.77)
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_5_F12/AIC_09_0015/AIC_09_0015_0.4.seg.nrrd"    ### near sphere (R = 0.80)
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_11_F1/AIC_13_0135/AIC_13_0135_0.4.seg.nrrd"    ### very high aberrations (R = 0.28)
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_112_F3/AIC_11_0031/AIC_11_0031_0.4.seg.nrrd"   ### high aberrations - elongated (R = 0.40)
+
+""" Modeled ICAs : """
+#filename = "/Users/florent/ownCloud/NeuroVascu/ICAs/_ICA_Model/Bif_6/1_Bif=6_Spl=2_R=3_Sed=1.0_AGr=0.5_ICA_Arr.nrrd"
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/107_Bif=8_Spl=2_R=4_Sed=2.0_AGr=0.75_ICA_Arr.nrrd"
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=2.0_AGr=1.0_ICA_Arr.nrrd"     ### R = 0.67 
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=2.0_AGr=0.75_ICA_Arr.nrrd"
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=4.0_AGr=0.75_ICA_Arr.nrrd"    ### relatively high aberrations (R = 0.53)
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=1.0_AGr=0.75_ICA_Arr.nrrd"    ### R = 0.68 
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=0.2_AGr=1.0_ICA_Arr.nrrd"     ### R = 0.80
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=8.0_AGr=1.0_ICA_Arr.nrrd"     ### R = 0.63
+#filename = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/40_Bif=6_Spl=2_R=4_Sed=12.0_AGr=0.44_ICA_Arr.nrrd"   ### moderate aberrations (R = 0.51)
 
 
 FileDir = os.path.dirname(os.path.abspath(filename)) + '/'
@@ -105,12 +126,14 @@ Hollow_ICA = np.copy(Dist)
 Sph = binary_dilation(Sph).astype(Sph.dtype)
 Hollow_ICA[Sph > 0] = 0
 
+#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Hollow_ICA)), "/Users/florent/Desktop/Hollow_ICA.nrrd")
 
 """
 BinHollow_ICA = np.copy(Hollow_ICA)
 BinHollow_ICA[BinHollow_ICA > 0] = 1
 
 DistHollow = distance_transform_cdt(BinHollow_ICA)
+sitk.WriteImage(sitk.GetImageFromArray(np.float32(DistHollow)), "/Users/florent/Desktop/DistHollow.nrrd")
 """
 
 print("\nDistance from sphere : " +str(Hollow_ICA.sum()))

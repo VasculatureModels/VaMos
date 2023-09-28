@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -42,6 +42,8 @@ import numpy as np
 
 
 imname = sys.argv[1]
+#imname = '/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/_Model_v6b/_Fid_5/0__ArtAmpl=66.93_mu=36.58_Sigma=5.3_Bif=77_Spl=3_Fid=5_ED_NoiseMod_.nrrd'
+#imname = '/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/_Model_v6b/_Fid_11/124__ArtAmpl=374.45_mu=193.46_Sigma=30.1_Bif=148_Spl=9_Fid=11_ED_NoiseMod_.nrrd'
 
 
 FileDir = os.path.dirname(os.path.abspath(imname)) + '/'

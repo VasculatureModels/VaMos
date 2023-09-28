@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -65,8 +65,14 @@ from MyFunctions.ICA_fun import *
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/Users/----/Downloads/mult_unrupt_untreat/AIC_01_0011_F8-T_F9-O/200812/',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent/Downloads/mult_unrupt_untreat/AIC_01_0011_F8-T_F9-O/200812/',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
+#ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Downloads/mult_unrupt_untreat/AIC_01_0011_F8-T_F9-O/_Segm_ICA/Segmentation.seg.nrrd',
+#	help="Segmented input 3D image (stack)")
+#ap.add_argument("-j", "--json", type=str, default = '', #/Users/florent/Downloads/mult_unrupt_untreat/AIC_01_0011_F8-T_F9-O/_Segm_ICA/F.mrk.json', #required=True,
+#    help="path for JSON file which contains the ground truth of the bif positions")
+#ap.add_argument("-csv", "--csv", type=str, default = '/Users/florent/Downloads/mult_unrupt_untreat/AIC_01_0011_F8-T_F9-O/__fiducials.csv', required=True,
+#    help="path for CSV file which contains the ground truth of the bif positions")
 ap.add_argument("-f", "--Fid", type=int, default='9', required=True,
 	help="Specify a Fiducial number (0 for all fiducials)")
 ap.add_argument("-cs", "--CropSize", type=int, default=64,
@@ -127,7 +133,9 @@ if fileextS == '.nii' or fileextS == '.mha' or fileextS == '.nrrd':
 	stackSegm = np.zeros((z,y,x))
 	for i in range(z):
 		stackSegm[i,:,:] = cv2.flip(cv2.rotate(stackSegm1[:,:,i], cv2.ROTATE_90_CLOCKWISE),2)
-	
+	#sitk.WriteImage((sitk.GetImageFromArray(stackGray)),"/Users/florent/Desktop/gray.nrrd")
+	#sitk.WriteImage((sitk.GetImageFromArray(stackSegm)),"/Users/florent/Desktop/segm.nrrd")
+
 else:		   # Probably a DICOM folder...
 	reader2 = sitk.ImageSeriesReader()
 	dicom_names2 = reader2.GetGDCMSeriesFileNames(seg)
@@ -210,7 +218,8 @@ for FidLabel in fid_label:
 	CropBif = stackGray[Zc - hcs:Zc + hcs, Yc - hcs:Yc + hcs, Xc - hcs:Xc + hcs]
 	CropSegm = stackSegm[Zc - hcs:Zc + hcs, Yc - hcs:Yc + hcs, Xc - hcs:Xc + hcs]
 
-	
+	#sitk.WriteImage(sitk.GetImageFromArray(CropBif), "/Users/florent/Desktop/CropBif.nrrd")
+
 
 viewer = napari.view_image(CropBif)
 #Disp3D(CropSegm)

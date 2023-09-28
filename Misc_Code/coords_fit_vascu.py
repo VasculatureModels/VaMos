@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -106,9 +106,10 @@ def truncate(num, n):
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/Users/----/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
+#ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='/Users/----/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-x", "--X", type=str, default='175',
 	help="X coordinate to crop")
@@ -204,6 +205,22 @@ else:		   # Probably a DICOM folder...
 	#stack = np.uint8(stack*255.0/stack.max())
 '''
 
+""" 
+	###  IF WE NEED TO CONVERT A 16 BITS PER VOXEL VOLUME INTO 8 BITS PER VOXEL : ###
+if stackGray.min() > 20000:
+	stackGrayN = np.zeros(stackGray.shape, dtype=np.uint8)
+	tmp = (stackGray - stackGray.min()) / (stackGray.max()-stackGray.min())
+	stackGrayN = np.uint8(tmp*255)
+	sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackGrayN)), "/Users/florent/Desktop/stackGrayN.nrrd")
+	stackGray = np.copy(stackGrayN)
+elif stackGray.max() < 0:
+	stackp = stack + np.abs(stack.min())
+	stackGrayN = np.zeros(stackGray.shape, dtype=np.uint8)
+	tmp = (stackp - stackp.min()) / (stackp.max()-stackp.min())
+	stackN = np.uint8(tmp*255)
+	sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackN)), imname + '_8b.nrrd')
+	stackGray = np.copy(stackGrayN)
+"""
 
 z,y,x = stackSegm.shape
 zG,yG,xG = stackGray.shape

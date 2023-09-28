@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -46,6 +46,8 @@ from scipy.ndimage import zoom
 
 
 filename = sys.argv[1]
+#filename = "/Users/florent/Downloads/Pb algo/Segmentation.seg.nrrd"
+#filename = "/Users/florent/Nextcloud/NeuroVascu/Anévrismes/AIC_Caracterisation/IRM_With_AIC/Segmentation.seg.nrrd"
 
 sitkimg =sitk.ReadImage(filename, sitk.sitkUInt16)
 xs,ys,zs = sitkimg.GetSpacing()
@@ -147,6 +149,7 @@ cols=["Volume (nm^3)",
 stats = pd.DataFrame(data=stats_list, index=shape_stats.GetLabels(), columns=cols)
 stats.describe()
 
+#stats.to_excel("/Users/florent/Desktop/AIC.xlsx")
 
 """
 dfVol = stats.iloc[0]['Volume (nm^3)']

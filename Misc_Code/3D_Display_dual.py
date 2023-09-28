@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <---->, <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -63,6 +63,8 @@ volname = sys.argv[1]
 FileName = os.path.splitext(os.path.basename(volname))[0]
 dirname = os.path.dirname(os.path.abspath(volname)) + '/'
 
+#volname = '/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/11.nrrd'
+#print (volname)
 #print(os.path.splitext(os.path.basename(volname))[1])
 if os.path.splitext(os.path.basename(volname))[1] == '.nrrd':
     orig = sitk.ReadImage(volname)
@@ -126,18 +128,24 @@ buffer = np.zeros((data.shape[1], 12, data.shape[2]))
 dataStack1 = np.hstack((data, buffer))
 dataStack = np.hstack((dataStack1, data2))
 data = dataStack
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(data)), "/Users/florent/Desktop/stackDual.nrrd")
 
 
 ### Avoid display problems due to the presence of several colors in the stack,
 ### We threshold so that it's fully binary, everything is set to 255 :
 #data[data>0] = 255
 
+"""
+#data = tifffile.imread("/Users/florent/Desktop/mrbrain-8bit.tif")
+data = tifffile.imread("/Users/florent/Desktop/AIC_08_0247_012_TOF_3D_multi-slab_TH_AIC_z68_x196_y158.tif")
+"""
 
 """ 
 data[data>0] = 1
 data2 = ndi.binary_dilation(data).astype(data.dtype)
 data2[data2>0] = 1
 data = data2 - data
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
 """ 
 
 data = np.uint16(data.T *20.0)
