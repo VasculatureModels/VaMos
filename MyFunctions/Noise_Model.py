@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <--->
-contributor(s) : <--->, <---> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<---@----.-->
-<---@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -36,7 +36,6 @@ same conditions as regards security.
 The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
 """
-
 
 from scipy.ndimage import zoom
 from skimage.filters import threshold_multiotsu
@@ -188,7 +187,7 @@ def noise_model(SplineModelTOF, CropOrig, SigmStart, ZoomIn):
 	"""
 	SplineModelTOF[SplineModelTOF > 0] = SplineModelTOF[SplineModelTOF > 0] + GM_noise[SplineModelTOF > 0]
 	GM_noise[SplineModelTOF > 0] = SplineModelTOF[SplineModelTOF > 0]
-	#sitk.WriteImage(sitk.GetImageFromArray(GM_noise),"~/Desktop/GM_noise.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(GM_noise),"/Users/florent/Desktop/GM_noise.nrrd")
 
 	'''
 		Add up the arterial noise (specifically LF noise onto the arteries) : 

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <--->
-contributor(s) : <--->, <---> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<---@----.-->
-<---@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -37,7 +37,6 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
 """
 
-
 from mpl_toolkits.mplot3d import Axes3D
 import sys, os, glob, platform
 import numpy as np
@@ -58,7 +57,8 @@ def draw3d_mayavi(array, path):
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-seg", "--seg", type=str, default='~/Desktop/55.nrrd',
+#ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Desktop/55.nrrd',
 	help="Segmented input 3D image (stack)")
 args = vars(ap.parse_args())
 

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <--->
-contributor(s) : <--->, <---> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<---@----.-->
-<---@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -36,7 +36,6 @@ same conditions as regards security.
 The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
 """
-
 
 import os
 import cv2
@@ -310,7 +309,7 @@ def Display_dual_3D(Model, GTruth):
 	Edges = Edges1 + Edges2 + Edges3 + Edges4 + Edges5 + Edges6
 	Edges[Edges>=2] = 255
 	Model[Edges==255] = 255
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(Model)), "~/Desktop/Model.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(Model)), "/Users/florent/Desktop/Model.nrrd")
 	"""
 
 	""" 
@@ -318,7 +317,7 @@ def Display_dual_3D(Model, GTruth):
 	Model2 = ndi.binary_dilation(Model).astype(Model.dtype)
 	Model2[Model2>0] = 1
 	Model = Model2 - Model
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "~/Desktop/data.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
 	""" 
 	Model = np.uint16(Model.T *20.0)
 
@@ -352,7 +351,7 @@ def Display_dual_3D(Model, GTruth):
 	GTruth2 = ndi.binary_dilation(GTruth).astype(GTruth.dtype)
 	GTruth2[GTruth2>0] = 1
 	GTruth = GTruth2 - GTruth
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "~/Desktop/data.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
 	""" 
 	GTruth = np.uint16(GTruth.T *20.0)
 
@@ -542,7 +541,7 @@ def Display_3D(SplineModelTOF):
 def resample_image2(itk_image, is_label=False):
 	original_spacing = itk_image.GetSpacing()
 	out_spacing=[original_spacing[0], original_spacing[0], original_spacing[0]]
-	original_size	= itk_image.GetSize()
+	original_size = itk_image.GetSize()
 	out_size = [
 		int(np.round(original_size[0] * (original_spacing[0] / out_spacing[0]))),
 		int(np.round(original_size[1] * (original_spacing[1] / out_spacing[1]))),

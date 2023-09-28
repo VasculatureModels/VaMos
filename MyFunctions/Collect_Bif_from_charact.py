@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <--->
-contributor(s) : <--->, <---> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<---@----.-->
-<---@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -53,7 +53,7 @@ from MyFunctions.bif_geom_model import *
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/Users/----/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/55.nrrd', #required=True,
+ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/55.nrrd', #required=True,
     help="path input 3D image (stack) (.dcm or .nii or .mha or .nrrd) ")
 ap.add_argument("-cs", "--CropSize", type=int, default=64,
     help="Desired size for the cropped stacks")
@@ -68,6 +68,7 @@ Csize= args["CropSize"]
 
 
 ''' Collect file names : '''
+#tof_name = '/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/74.nrrd'
 FileDir = os.path.dirname(os.path.abspath(tof_name)) + '/'
 FileName = os.path.splitext(os.path.basename(tof_name))[0]
 FileExt = os.path.splitext(os.path.basename(tof_name))[1]
