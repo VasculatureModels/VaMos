@@ -81,6 +81,5 @@ The following python packages should be installed :
 
 
 ## License
-"CEA CNRS INRIA logiciel libre" CeCILL version 2.1
-
+TO BE DETERMINED...
 
