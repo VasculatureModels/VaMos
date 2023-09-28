@@ -77,7 +77,11 @@ The following python packages should be installed :
 
 
 ## Authors and acknowledgment
-<------>
+
+Florent Autrusseau: Florent.Autrusseau@univ-nantes.fr
+
+Rafic Nader: Rafic.Nader@univ-nantes.fr
+
 
 
 ## License
