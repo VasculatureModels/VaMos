@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -37,6 +37,7 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
 """
 
+## https://stackoverflow.com/questions/46721462/getting-a-good-interpolation-fit-for-1d-curve-in-3d-space-python
 
 ''' 
 ########################################################################
@@ -87,9 +88,10 @@ RandPoint = 0
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
+#ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-bn", "--BifNum", type=str, default='79',
 	help="Position of the bifurcation in the list of bifurcs from the 3D graph")
@@ -172,7 +174,8 @@ if fileext == '.nii' or fileext == '.mha' or fileext == '.nrrd':
 	stackSegm = sitk.GetArrayFromImage(sitkimgSegm)
 
 	#stackSegm2 = maxEntropyTh(stackGray)
-	
+	#sitk.WriteImage(sitk.GetImageFromArray(stackSegm2),"/Users/florent/Desktop/segmEntropy.nrrd")
+
 	#stackGray = np.copy(stack)
 	#if stack.min() < 0:
 	#	stack = stack + np.abs(stack.min())
@@ -224,6 +227,7 @@ if x != xG or y != yG or z != zG :
 """
 CropCoords, CropOrig, CroppedSegm, SplineModelTOF = geometric_model(stackGray, stackSegm, BifNum, SplineStr, CropSize, ShowPlot, RandPoint)
 
+#sitk.WriteImage(sitk.GetImageFromArray(SplineModelTOF), "/Users/florent/desktop/SplineModelTOF.nrrd")
 
 """
 	Generating the adapted background noise :

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -70,9 +70,9 @@ Show_MotherBranch = 1
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent//Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.seg.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-bn", "--BifNum", type=str, default='111',
 	help="Position of the bifurcation in the list of bifurcs from the 3D graph")
@@ -255,7 +255,8 @@ if AddICA == 1:
 	ICATrueBif2 = np.maximum(ICATrueBif, ICAOnly)
 
 	[Grad3Dx, Grad3Dy, Grad3Dz] = np.gradient(ICATrueBif2, -1, -1, -1)
-	
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Grad3Dx)), "/Users/florent/Desktop/gx.nrrd")
+
 	ring = ndimage.binary_erosion(ICA_Arr).astype(ICA_Arr.dtype)
 	ring = ICA_Arr - ring
 	ICATrueBif2 = ICATrueBif2 - (ring * Grad3Dx + ring * Grad3Dy + ring * Grad3Dz)
@@ -269,7 +270,7 @@ if AddICA == 1:
 
 	ring = ringD - ringE
 	ringB = gaussian_filter(ring, sigma=1.0)
-	sitk.WriteImage(sitk.GetImageFromArray(ringB),"~/Desktop/ringB.nrrd")
+	sitk.WriteImage(sitk.GetImageFromArray(ringB),"/Users/florent/Desktop/ringB.nrrd")
 	ringB = (ringB * 0.1 / ringB.max()) + 1
 	ICATrueBif2 = ICATrueBif2 * ringB
 	#img = sitk.GetArrayFromImage(sitk.ReadImage("img.nrrd"))

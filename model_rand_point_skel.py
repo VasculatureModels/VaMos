@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -37,6 +37,7 @@ The fact that you are presently reading this means that you have had
 knowledge of the CeCILL license and that you accept its terms.
 """
 
+## https://stackoverflow.com/questions/46721462/getting-a-good-interpolation-fit-for-1d-curve-in-3d-space-python
 
 ''' 
 ########################################################################
@@ -107,9 +108,10 @@ RandPoint_Or_xyz = 1  # if == 1 : Random Point Along centerlines / if == 2 : pro
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
+#ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-str", "--SplineStr", type=str, default='8',
 	help="Strength of the spline modification (10 to 30)")
@@ -202,14 +204,49 @@ if fileext == '.nii' or fileext == '.mha' or fileext == '.nrrd':
 	NrrdImgSeg = nrrd.read(seg)
 	stackSegm = NrrdImgSeg[0]
 	"""
+elif fileext == '.tif' or fileext == '.tiff':
+	stack = skimage.io.imread(inputpath, plugin='tifffile')
+	if stack.min() < 0:
+		stack = stack + np.abs(stack.min())
+	stackGray = np.uint8(stack*255.0/stack.max())
+
+	stackSegm = skimage.io.imread(seg, plugin='tifffile')
+	if stackSegm.min() < 0:
+		stackSegm = stackSegm + np.abs(stackSegm.min())
+	stackSegm = np.uint8(stack * 255.0 / stackSegm.max())
+
 else:		   # Probably a DICOM folder...
-	print('Give a 3D stack as an input (.nrrd, .nii or .mha)\n')
-	sys.exit(0)
+	reader1 = sitk.ImageSeriesReader()
+	dicom_names = reader1.GetGDCMSeriesFileNames(inputpath)
+	reader1.SetFileNames(dicom_names)
+
+	sitkimg = reader1.Execute()
+	stack_before_resampling = sitk.GetArrayFromImage(sitkimg)
+	sitkimgR = resample_image2(sitkimg, is_label=False)
+	stackGray = sitk.GetArrayFromImage(sitkimgR)
+
+
+	#reader2 = sitk.ImageSeriesReader()
+	#dicom_names2 = reader2.GetGDCMSeriesFileNames(seg)
+	#reader2.SetFileNames(dicom_names2)
+
+	#sitkimgSegm = reader2.Execute()
+	#stack_before_resamplingSegm = sitk.GetArrayFromImage(sitkimgSegm)
+	#sitkimgSegm = resample_image2(sitkimgSegm, is_label=False)
+	#stackSegm = sitk.GetArrayFromImage(sitkimgSegm)
+
+	sitkimgSegm = sitk.ReadImage(seg)
+	#resampling
+	sitkimgSegm = resample_image2(sitkimgSegm, is_label=False)
+	stackSegm = sitk.GetArrayFromImage(sitkimgSegm)
+
+
+	#print('Give a 3D stack as an input (.nrrd, .nii or .mha)\n')
+	#sys.exit(0)
 
 
 z,y,x = stackSegm.shape
 zG,yG,xG = stackGray.shape
-
 
 if x != xG or y != yG or z != zG :
 	print('\nWARNING : Size Mismatch !\n')

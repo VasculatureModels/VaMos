@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright - <---->
-contributor(s) : <----> (February 2023)
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-<----@----.-->
-<----@----.-->
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
@@ -94,9 +94,9 @@ sed = 0   # <-- initialize ElasticDeform
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/florent//Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='~/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/TestingTOFs/3.seg.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-str", "--SplineStr", type=str, default='1',
 	help="Strength of the spline modification (10 to 30)")
