@@ -10,7 +10,7 @@ numpy==1.23.5
 opencv-contrib-python==4.6.0.66
 openpyxl==3.0.10
 pandas==1.4.4
-Pillow==9.2.0
+Pillow==9.3.0
 pydicom==2.3.0
 PyQt5==5.15.9
 PyQt6==6.4.2
