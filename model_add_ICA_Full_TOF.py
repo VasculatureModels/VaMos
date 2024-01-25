@@ -239,7 +239,7 @@ if Fid == 22:
 	Fid = random.choice(numbers)
 
 
-''' 
+'''
 	Launching the spline model :
 	 - Get the 3D graph
 	 - Grab one bifurcation from the 3D graph (number = 'bn / BifNum')
@@ -355,21 +355,17 @@ for FidLabel in fid_label:
 			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICA_Full_Mask)),save_ICA_Full_Mask)
 
 
-			""" Dilate the ICA mask: 
+			""" Dilate the ICA mask:
 			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask).astype(ICA_Full_Mask.dtype)
 			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask_Dil).astype(ICA_Full_Mask.dtype)
 			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask_Dil).astype(ICA_Full_Mask.dtype)
-			#noisy_model_GM = gaussian_filter(ICA_Full_Mask_Dil, sigma=1.2)
 			"""
 
 			""" """
 			struct2 = ndimage.generate_binary_structure(3, 3)
 			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask, structure=struct2, iterations=2).astype(ICA_Full_Mask.dtype)
-			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICA_Full_Mask_Dil*255)),"/home/florent/Bureau/tmpDil2.nrrd")
 			ICA_Full_Mask_Dil2 = ndimage.binary_dilation(ICA_Full_Mask, structure=struct2, iterations=3).astype(ICA_Full_Mask.dtype)
-			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICA_Full_Mask_Dil*255)),"/home/florent/Bureau/tmpDil3.nrrd")
 			""" """
-
 
 			TOF_ICA = np.zeros(stackGray.shape)
 
@@ -390,9 +386,6 @@ for FidLabel in fid_label:
 				AGrowth) + "_ICA_Full_TOF.nrrd"
 			print(save_ICA_Full_TOF)
 			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(TOF_ICA)),save_ICA_Full_TOF)
-
-
-
 
 		else:
 			print("\nCannot save the output images. \nEncountered a problem with the ICA positioning.\n")
