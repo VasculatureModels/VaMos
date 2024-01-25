@@ -96,7 +96,7 @@ for i in range(len(data['markups'][0]['controlPoints'])):
 	coords_gt_bif.append(np.abs(data['markups'][0]['controlPoints'][i]['position']))
 	fid_label.append(data['markups'][0]['controlPoints'][i]['label'])
 
-[coords_gt_bif, node_id] = Get_Json_Bifs3(stackSegm, coords_gt_bif)
+[coords_gt_bif, node_id] = Get_Json_Bifs5(stackSegm, coords_gt_bif)
 
 
 print('------------------------------------------------------------------------------------\n')

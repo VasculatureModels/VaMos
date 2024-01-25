@@ -149,8 +149,11 @@ def geometric_model(*arg):
         SigmaED = arg[9]
         AGrowth = arg[10]
 
+    if CropSize <= 32:
+        CropExt = 30
+    else:
+        CropExt = 0
 
-    CropExt = 30
 
     ### Expanding CropSize to have cleaner arteries diameters at the cube borders... ###
     CropSize = CropSize + CropExt
@@ -175,12 +178,27 @@ def geometric_model(*arg):
         Xc = 0; Yc = 0; Zc = 0;
         while Xc < int(CropSize / 2) or Yc < int(CropSize / 2) or Zc < int(CropSize / 2) or Xc > x - int(
                 CropSize / 2) or Yc > y - int(CropSize / 2) or Zc > z - int(CropSize / 2):
+            '''
             randBif = random.randint(0, len(graph))
             Nb = list(graph.neighbors(randBif))
             if len(Nb) > 1:
                 randBranch = random.randint(0, len(Nb) - 1)
             else:
                 randBranch = 0
+            '''
+
+            ###   Look for graph nodes that actually have at least one neighbor : ###
+            Gl = []
+            for i in range(len(graph)):
+                Gl.append(len(graph[i]))
+            G = np.asarray(Gl)
+            Gnodes = np.where(G != 0)[0]
+            idxg = np.random.randint(0,len(Gnodes))
+            randBif = Gnodes[idxg]
+            Nb = list(graph.neighbors(randBif))
+            randBranch = random.randint(0, len(Nb) - 1)
+
+
             Coords_Branch = []
             Coords_Branch.append(graph[randBif][Nb[randBranch]]['pts'])
             lenBr = len(Coords_Branch[0])
@@ -325,8 +343,9 @@ def geometric_model(*arg):
                     Coords_Branches.append(graphCrop[idx][idx2]['pts'])
                     Coords_BranchN = Coords_Branches[inc]
                     inc += 1
-                    current_bif_center = graphCrop.nodes[idx2]['o']
+                    #current_bif_center = graphCrop.nodes[idx2]['o']
 
+                    #if len(Coords_BranchN) > 3: ###   <-- if we want to discard the smaller branches (probably skeleton errors)
                     S1 = np.zeros(CroppedSegm.shape)
                     S2 = np.zeros(CroppedSegm.shape)
 

@@ -101,7 +101,7 @@ ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/Neu
 ap.add_argument("-str", "--SplineStr", type=str, default='1',
 	help="Strength of the spline modification (10 to 30)")
 ap.add_argument("-f", "--Fid", type=int, default='0',
-	help="Specify a Fiducial number (0 for all fiducials)")
+	help="Specify a Fiducial number (0 for all fiducials, 22 for random)")
 ap.add_argument("-sigst", "--SigmStart", type=str, default='0.0',
 	help="Starting value of the Noise Sigma (prior filtering) (if = 0: random value in [0.5, 2.5])")
 ap.add_argument("-j", "--json", type=str, required=True,
@@ -231,8 +231,15 @@ for i in node_id:
 print('------------------------------------------------------------------------------------\n')
 """ """
 
+if Fid == 22:
+	numbers = list(range(0, len(coords_gt_bif)))
+	for idxC in range(len(coords_gt_bif)):
+		if coords_gt_bif[idxC].sum() == 0:
+			numbers.remove(idxC)
+	Fid = random.choice(numbers)
 
-''' 
+
+'''
 	Launching the spline model :
 	 - Get the 3D graph
 	 - Grab one bifurcation from the 3D graph (number = 'bn / BifNum')
@@ -288,45 +295,103 @@ for FidLabel in fid_label:
 			VascuLabels[ICA_Arr > 0] = 128
 
 			""" Saving the Vascular tree and ICA as a labelled image : """
-			save_ICA_label = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(AGrowth) + "_ICA_Label_Model.seg.nrrd"
-			print(save_ICA_label)
-			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(VascuLabels)), save_ICA_label)
+			#save_ICA_label = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(AGrowth) + "_ICA_Label_Model.seg.nrrd"
+			#print(save_ICA_label)
+			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(VascuLabels)), save_ICA_label)
 
-			save_Model = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + '_SigSt=' + str(SigmStart) + "_R=" +str(Radius) +"_Sed=" +str(SigmaED) + "_AGr=" + str(AGrowth) + "_Model.nrrd"
-			print(save_Model)
-			sitk.WriteImage(sitk.GetImageFromArray(noisy_model_GM), save_Model)
+			#save_Model = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + '_SigSt=' + str(SigmStart) + "_R=" +str(Radius) +"_Sed=" +str(SigmaED) + "_AGr=" + str(AGrowth) + "_Model.nrrd"
+			#print(save_Model)
+			#sitk.WriteImage(sitk.GetImageFromArray(noisy_model_GM), save_Model)
 
 			''' Saving the ICA array only: '''
-			ICAOnly = VascuLabels - CleanVascu
-			ICAOnly[ICAOnly != 128] = 0
-			save_ICAOnly = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + "_R=" +str(Radius) +"_Sed=" +str(SigmaED) + "_ICA.seg.nrrd"
-			print(save_ICAOnly)
-			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICAOnly)), save_ICAOnly)
-			print('\n')
+			#ICAOnly = VascuLabels - CleanVascu
+			#ICAOnly[ICAOnly != 128] = 0
+			#save_ICAOnly = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(SplineStr) + "_R=" +str(Radius) +"_Sed=" +str(SigmaED) + "_ICA.seg.nrrd"
+			#print(save_ICAOnly)
+			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICAOnly)), save_ICAOnly)
+			#print('\n')
 
 			if not (os.path.exists(FileDir + "_ICA_Model/")):
 				os.makedirs(FileDir + "_ICA_Model/")
 
 			'''    Save the output images :    '''
-			save_Clean_Vascu = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
-				SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(
-				AGrowth) + "_CleanVascu.seg.nrrd"
-			print(save_Clean_Vascu)
-			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(CleanVascu) * 255), save_Clean_Vascu)
+			#save_Clean_Vascu = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
+			#	SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(
+			#	AGrowth) + "_CleanVascu.seg.nrrd"
+			#print(save_Clean_Vascu)
+			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(CleanVascu) * 255), save_Clean_Vascu)
 
-			save_whole_Vascu = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
-				SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(AGrowth) + "_BinOrig.seg.nrrd"
-			print(save_whole_Vascu)
-			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(BinCrop) * 255), save_whole_Vascu)
+			#save_whole_Vascu = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
+			#	SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(AGrowth) + "_BinOrig.seg.nrrd"
+			#print(save_whole_Vascu)
+			#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(BinCrop) * 255), save_whole_Vascu)
 
-			save_OrigCrop = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
-				SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_Orig.nrrd"
-			print(save_OrigCrop)
-			sitk.WriteImage(sitk.GetImageFromArray(CropOrig), save_OrigCrop)
+			#save_OrigCrop = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_Spl=" + str(
+			#	SplineStr) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_Orig.nrrd"
+			#print(save_OrigCrop)
+			#sitk.WriteImage(sitk.GetImageFromArray(CropOrig), save_OrigCrop)
+
+
+			"""
+				Adding the modeled aneurysm onto the Full TOF stack.
+				i.e. only the ICA is synthetic within an actual MRA-TOF.
+			"""
+			(cz, cy, cx) = VascuLabels.shape
+			hc = int(cz/2)
+
+			ICA_Crop = np.zeros(VascuLabels.shape)
+			ICA_Crop[VascuLabels==128] = 1
+			ICA_Full_Mask = np.zeros(stackGray.shape)
+			ICA_Full = np.zeros(stackGray.shape)
+
+			ICA_Full_Mask[coords_gt_bif[Fid-1][2]-hc:coords_gt_bif[Fid-1][2]+hc,
+						coords_gt_bif[Fid-1][1]-hc:coords_gt_bif[Fid-1][1]+hc,
+						coords_gt_bif[Fid-1][0]-hc:coords_gt_bif[Fid-1][0]+hc] = ICA_Crop
+
+
+			save_ICA_Full_Mask = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(
+				AGrowth) + "_ICA_Full_Mask.nrrd"
+			print(save_ICA_Full_Mask)
+			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(ICA_Full_Mask)),save_ICA_Full_Mask)
+
+
+			""" Dilate the ICA mask:
+			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask).astype(ICA_Full_Mask.dtype)
+			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask_Dil).astype(ICA_Full_Mask.dtype)
+			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask_Dil).astype(ICA_Full_Mask.dtype)
+			"""
+
+			""" """
+			struct2 = ndimage.generate_binary_structure(3, 3)
+			ICA_Full_Mask_Dil = ndimage.binary_dilation(ICA_Full_Mask, structure=struct2, iterations=2).astype(ICA_Full_Mask.dtype)
+			ICA_Full_Mask_Dil2 = ndimage.binary_dilation(ICA_Full_Mask, structure=struct2, iterations=3).astype(ICA_Full_Mask.dtype)
+			""" """
+
+			TOF_ICA = np.zeros(stackGray.shape)
+
+			noisy_model_GM_Masked = np.copy(noisy_model_GM)
+			noisy_model_GM_Masked[ICA_Crop != 1] = 0
+
+			ICA_Full[coords_gt_bif[Fid-1][2]-hc:coords_gt_bif[Fid-1][2]+hc,
+					coords_gt_bif[Fid-1][1]-hc:coords_gt_bif[Fid-1][1]+hc,
+					coords_gt_bif[Fid-1][0]-hc:coords_gt_bif[Fid-1][0]+hc] = noisy_model_GM_Masked
+
+			TOF_ICA = np.maximum(stackGray, ICA_Full)
+
+			TOF_ICA_Blur = ndimage.gaussian_filter(TOF_ICA, sigma=0.8)
+
+			TOF_ICA[ICA_Full_Mask_Dil2 > 0] = TOF_ICA_Blur[ICA_Full_Mask_Dil2 > 0]
+
+			save_ICA_Full_TOF = FileDir + "_ICA_Model/" + FileName + "_Bif=" + str(FidNb) + "_R=" + str(Radius) + "_Sed=" + str(SigmaED) + "_AGr=" + str(
+				AGrowth) + "_ICA_Full_TOF.nrrd"
+			print(save_ICA_Full_TOF)
+			sitk.WriteImage(sitk.GetImageFromArray(np.uint8(TOF_ICA)),save_ICA_Full_TOF)
 
 		else:
 			print("\nCannot save the output images. \nEncountered a problem with the ICA positioning.\n")
 			noisy_model_GM = np.zeros(SplineModelTOF.shape)
+
+
 
 
 		#SplineModelTOF[SplineModelTOF > 0] = 1

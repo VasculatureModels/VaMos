@@ -59,7 +59,7 @@ def randParam():
 
 
 
-if ver[0] == 3 and ver[1] == 9 or ver[1] == 10:
+if ver[0] == 3 and ver[1] == 9 or ver[1] == 10  or ver[1] == 11:
 	print("Using Python version {}.{} ... OK !".format(ver[0], ver[1]))
 else :
 	print('\n\t----------------')

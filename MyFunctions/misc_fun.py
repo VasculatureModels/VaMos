@@ -305,20 +305,20 @@ def Display_dual_3D(Model, GTruth):
 	Edges4[:,ym-2:ym,:] = 1
 	Edges5[:,:,0:2] = 1
 	Edges6[:,:,xm-2:xm] = 1
-	
+
 	Edges = Edges1 + Edges2 + Edges3 + Edges4 + Edges5 + Edges6
 	Edges[Edges>=2] = 255
 	Model[Edges==255] = 255
 	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(Model)), "/Users/florent/Desktop/Model.nrrd")
 	"""
 
-	""" 
+	"""
 	Model[Model>0] = 1
 	Model2 = ndi.binary_dilation(Model).astype(Model.dtype)
 	Model2[Model2>0] = 1
 	Model = Model2 - Model
 	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
-	""" 
+	"""
 	Model = np.uint16(Model.T *20.0)
 
 	mlab.figure(bgcolor=(0.63, 0.63, 0.63), size=(600, 600))
@@ -345,14 +345,14 @@ def Display_dual_3D(Model, GTruth):
 	GTruth[GTruth > 0] = 255
 	GTruth[Edges==255] = 255
 	"""
-	
-	""" 
+
+	"""
 	GTruth[GTruth>0] = 1
 	GTruth2 = ndi.binary_dilation(GTruth).astype(GTruth.dtype)
 	GTruth2[GTruth2>0] = 1
 	GTruth = GTruth2 - GTruth
 	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
-	""" 
+	"""
 	GTruth = np.uint16(GTruth.T *20.0)
 
 	mlab.figure(bgcolor=(0.63, 0.63, 0.63), size=(600, 600))
@@ -368,7 +368,7 @@ def Display_dual_3D(Model, GTruth):
 
 	mlab.pipeline.iso_surface(voi2, colormap='hot')
 	mlab.title("Ground Truth", size=0.6)
-	
+
 	#voi2b = mlab.pipeline.extract_grid(src2)
 	#voi2b.trait_set(y_max=int(yg/3), z_max=int(zg*2/3))
 	##voi2b.trait_set(y_max=12, z_max=53)
@@ -576,7 +576,7 @@ def elastic_transform(image, alpha, sigma, alpha_affine, random_state=None):
 
     shape = image.shape
     shape_size = shape[:2]
-    
+
     # Random affine
     center_square = np.float32(shape_size) // 2
     square_size = min(shape_size) // 3
@@ -939,27 +939,7 @@ def Get_Json_Bifs2(stack, coords_gt_bif):
 	return (coords_gt_bif, node_id)
 
 #########################################################################################################
-def Get_Json_Bifs3(stack, coords_gt_bif):
-
-	stack[stack > 0] = 1.
-	ske = skeletonize_3d(stack).astype(np.uint16)
-	graph = sknw.build_sknw(ske)
-	stack[stack>0]=255
-
-	dist = []
-	node_id=[]
-	for coords_gt in coords_gt_bif:
-		for i in range(len(graph)):
-			coords_center_bif = graph.nodes[i]['o']
-			coords_center_bif = coords_center_bif[::-1]
-			dist.append(np.linalg.norm(np.array(coords_gt) - np.array(coords_center_bif)))
-		node_id.append(dist.index(min(dist)))
-		dist=[]
-
-	return (coords_gt_bif, node_id)
-
-#########################################################################################################
-def Get_Json_Bifs4(stackSegm, coords_gt_bif):
+def Get_Json_Bifs3(stackSegm, coords_gt_bif):
 
 	stackSegm[stackSegm > 0] = 1.
 	ske = skeletonize_3d(stackSegm).astype(np.uint16)
@@ -980,6 +960,54 @@ def Get_Json_Bifs4(stackSegm, coords_gt_bif):
 		#print("Fid: F-%d, dist: %f, bif_id: %d" %(i+1, dist[dist.index(min(dist))], dist.index(min(dist))))
 
 	return(node_id)
+
+#########################################################################################################
+def Get_Json_Bifs4(stack, coords_gt_bif):
+
+	stack[stack > 0] = 1.
+	ske = skeletonize_3d(stack).astype(np.uint16)
+	graph = sknw.build_sknw(ske)
+	stack[stack>0]=255
+
+	dist = []
+	node_id=[]
+	for coords_gt in coords_gt_bif:
+		for i in range(len(graph)):
+			coords_center_bif = graph.nodes[i]['o']
+			coords_center_bif = coords_center_bif[::-1]
+			dist.append(np.linalg.norm(np.array(coords_gt) - np.array(coords_center_bif)))
+		node_id.append(dist.index(min(dist)))
+		dist=[]
+
+	return (coords_gt_bif, node_id)
+
+#########################################################################################################
+def Get_Json_Bifs5(stackSegm, coords_gt_bif):
+
+	stackSegm[stackSegm > 0] = 1.
+	ske = skeletonize_3d(stackSegm).astype(np.uint16)
+	graph = sknw.build_sknw(ske)
+	stackSegm[stackSegm>0]=255
+
+	dist = []
+	node_id=[]
+	idx = 0
+	for coords_gt in coords_gt_bif:
+		for i in range(len(graph)):
+			coords_center_bif = graph.nodes[i]['o']
+			coords_center_bif = coords_center_bif[::-1]
+			dist.append(np.linalg.norm(np.array(coords_gt) - np.array(coords_center_bif)))
+		node_id.append(dist.index(min(dist)))
+		graph_bif = graph.nodes[dist.index(min(dist))]['o']
+		graph_bif = graph_bif[::-1]
+		dist=[]
+		if sum(coords_gt) > 0:
+			coords_gt_bif[idx] = graph_bif
+		else:
+			coords_gt_bif[idx] = np.array([0., 0., 0.],dtype=np.uint16)
+		idx += 1
+
+	return (coords_gt_bif, node_id)
 
 #########################################################################################################
 def Skeletonization(stack):
@@ -1100,4 +1128,3 @@ def Skeletonization(stack):
 	#M = ndimage.binary_dilation(M).astype(M.dtype)
 
 	return(M)
-

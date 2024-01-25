@@ -40,7 +40,7 @@ knowledge of the CeCILL license and that you accept its terms.
 import numpy as np
 import SimpleITK as sitk
 import matplotlib.pyplot as plt
-import os
+import os, sys
 
 
 
@@ -228,7 +228,8 @@ if __name__ == "__main__":
 
   #filename = sys.argv[1]
   #filename = "/Volumes/LaCie/TOMOSTEO/CBCT_2/Anne-Marie_B/_Volume/Anne-Marie_B.nrrd"
-  filename = "/Volumes/LaCie/TOMOSTEO/CBCT_2/Dominique_B/_Volume/Dominique_B.nrrd"
+  #filename = "/Volumes/LaCie/TOMOSTEO/CBCT_2/Dominique_B/_Volume/Dominique_B.nrrd"
+  filename = sys.argv[1]
   FileDir = os.path.dirname(os.path.abspath(filename))+'/'
   FileName = os.path.splitext(os.path.basename(filename))[0]
   FileExt = os.path.splitext(os.path.basename(filename))[1]
@@ -254,3 +255,12 @@ if __name__ == "__main__":
   rotim = rotation3d_x(img, 270)
   sitk.WriteImage(rotim, "rot_270x.nrrd")
 
+
+  rotim = rotation3d_y(img, 180)
+  sitk.WriteImage(rotim, "rot_180y.nrrd")
+
+  rotim = rotation3d_z(img, 180)
+  sitk.WriteImage(rotim, "rot_180z.nrrd")
+
+  rotim = rotation3d_x(img, 180)
+  sitk.WriteImage(rotim, "rot_180x.nrrd")
