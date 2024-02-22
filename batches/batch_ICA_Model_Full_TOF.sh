@@ -85,4 +85,3 @@ for iter in 1 2 3 4 5
         #python model_add_ICA_Full_TOF.py -i ${path}58.nii -seg ${pathSeg}58.seg.nii -j ${path}58.seg_F.mrk.json -str ${strSpl} -sigst ${SigSt} -f 22
         #python model_add_ICA_Full_TOF.py -i ${path}59.nii -seg ${pathSeg}59.seg.nii -j ${path}59.seg_F.mrk.json -str ${strSpl} -sigst ${SigSt} -f 22
     done
-

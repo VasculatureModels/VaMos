@@ -212,7 +212,7 @@ for i in range(len(data['markups'][0]['controlPoints'])):
 
 #[coords_gt_bif, node_id] = Get_Json_Bifs2(stackSegm, coords_gt_bif)
 
-node_id = Get_Json_Bifs5(stackSegm, coords_gt_bif)
+[coords_gt_bif, node_id] = Get_Json_Bifs5(stackSegm, coords_gt_bif)
 
 """ """
 print('------------------------------------------------------------------------------------\n')

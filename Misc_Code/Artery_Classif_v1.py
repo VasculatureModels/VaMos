@@ -41,17 +41,18 @@ import json
 import os, sys
 import numpy as np
 from scipy import ndimage
+import raster_geometry as rg
 
 ver = sys.version_info
 
 
-if ver[0] == 3 and ver[1] == 9 or ver[1] == 10:
+if ver[0] == 3 and ver[1] == 9 or ver[1] == 10  or ver[1] == 11:
 	print("Using Python version {}.{} ... OK !".format(ver[0], ver[1]))
 else :
 	print('\n\t----------------')
 	print('\t   WARNING ! ')
 	print('\t----------------')
-	print('\t --> Tested only with python versions 3.9 and 3.10...\n\n')
+	print('\t --> Tested only with python versions 3.9 to 3.11...\n\n')
 	#sys.exit(0)
 
 sys.path.append("../")
@@ -147,21 +148,24 @@ for i in node_id:
 print('----------------------------------------------------------------------\n')
 
 
+#graph = GetGraph2(stackSegm.astype(np.uint8))
+
 
 """
 	Place 3D spheres at the fiducials locations
 	in order to remove the bifurcations from the segmentation.
 """
 '''
-r = 6
+r = 8
 for idx in range(len(coords_gt_bif)):
 	x0 = int(coords_gt_bif[idx][0])
 	y0 = int(coords_gt_bif[idx][1])
 	z0 = int(coords_gt_bif[idx][2])
 	Sph = Make_Sphere_NoED(x, y, z, x0, y0, z0, r)
 	stackSegm[Sph>0] = 0
-'''
 #sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackSegm)),"/home/florent/Bureau/tmp2.nrrd")
+'''
+
 
 """
 	Place crosshairs onto the BoI to split the arteries.
@@ -184,6 +188,7 @@ Eraser = ndimage.convolve(FidImg, Blk, mode='reflect', cval=0.0)
 
 stackSegm[Eraser==1]= 0
 
+
 #################################################################################################
 
 """
@@ -202,7 +207,6 @@ Seeds = sitk.GetArrayFromImage(seeds)
 """
 	Remove the smaller objects :
 """
-
 for gl in range(Seeds.max()):
 	(zp,yp,xp) = np.where(Seeds == gl)
 	if len(zp) < 100 :
@@ -231,3 +235,64 @@ LabelBranches = sitk.GetImageFromArray(FiltDilatedImg)
 
 #sitk.WriteImage(dilated_image,'dilated_seg_image.nrrd')
 sitk.WriteImage(LabelBranches, inputimage[:-4] + "_labels.seg.nrrd")
+
+
+ImLabels = np.copy(FiltDilatedImg)
+ImLabels[ImLabels > 0] = 255
+graph = GetGraph2(ImLabels.astype(np.uint8))
+
+"""
+	Check the labels along the centerlines
+"""
+LabelBr = sitk.GetArrayFromImage(LabelBranches)
+ArteryLayer = np.zeros(stackSegm.shape).astype(np.uint8)
+Sph_3D = rg.sphere((16, 16, 16), 8).astype(np.uint8)
+stackSegm[stackSegm > 0] = 1
+
+for ig in range(len(graph)):
+	NeighbO = list(graph.neighbors(ig))
+	if NeighbO != []:
+		branchO = graph[ig][NeighbO[0]]['pts']
+		BrSk = []
+
+		for ib in range(len(branchO)):
+			zi = branchO[ib][0]
+			yi = branchO[ib][1]
+			xi = branchO[ib][2]
+			BrSk.append(LabelBr[zi][yi][xi])
+			ArteryLayer[zi][yi][xi] = 1
+
+
+		ArrBr = np.asarray(branchO)
+		zmin = ArrBr[:,0].min() - 16
+		if zmin < 0: zmin = 0
+		ymin = ArrBr[:,1].min() - 16
+		if ymin < 0: ymin = 0
+		xmin = ArrBr[:,2].min() - 16
+		if xmin < 0: xmin = 0
+		zmax = ArrBr[:,0].max() + 16
+		if zmax > z: zmax = z
+		ymax = ArrBr[:,1].max() + 16
+		if ymax > y: ymax = y
+		xmax = ArrBr[:,2].max() + 16
+		if xmax > x: xmax = x
+
+		CropArteryLayer = ArteryLayer[zmin:zmax, ymin:ymax, xmin:xmax]
+
+		CropConvBranch = ndimage.convolve(CropArteryLayer, Sph_3D, mode='reflect', cval=0.0)
+
+		ConvBranch = np.zeros(stackSegm.shape)
+		ConvBranch[zmin:zmax, ymin:ymax, xmin:xmax] = CropConvBranch
+
+		#ConvBranch = np.uint32(ConvBranch)
+		ConvBranch[ConvBranch>0] = max(BrSk)
+		ConvBranch = np.multiply(stackSegm,ConvBranch)
+
+		FiltDilatedImg[ConvBranch > 0] = ConvBranch[ConvBranch > 0]
+		#ConvBranch = np.zeros(ConvBranch.shape)
+
+
+		##BrSkArr = np.asarray(BrSk)
+		#print("Branch: " + str(ig) + ", label: " +str(BrSkArr.max()))
+
+sitk.WriteImage(sitk.GetImageFromArray(FiltDilatedImg), inputimage[:-4] + "_labels2.seg.nrrd")

@@ -984,10 +984,11 @@ def Get_Json_Bifs4(stack, coords_gt_bif):
 #########################################################################################################
 def Get_Json_Bifs5(stackSegm, coords_gt_bif):
 
-	stackSegm[stackSegm > 0] = 1.
-	ske = skeletonize_3d(stackSegm).astype(np.uint16)
+	BinStack = np.copy(stackSegm)
+	BinStack[BinStack > 0] = 1.
+	ske = skeletonize_3d(BinStack).astype(np.uint16)
 	graph = sknw.build_sknw(ske)
-	stackSegm[stackSegm>0]=255
+	BinStack[BinStack>0]=255
 
 	dist = []
 	node_id=[]
