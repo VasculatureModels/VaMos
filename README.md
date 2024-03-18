@@ -85,5 +85,24 @@ Rafic Nader: Rafic.Nader@univ-nantes.fr
 
 
 ## License
-TO BE DETERMINED...
+
+"""
+Copyright - Florent Autrusseau
+contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
+
+Florent.Autrusseau@univ-nantes.fr
+Rafic.Nader@univ-nantes.fr
+
+This software is a computer program whose purpose is to detect cerebral
+vascular tree bifurcations within MRA-TOF acquisitions.
+
+"INSERM Transfert" is currently working on the license to be applied to this computer program.
+So, this is a work in progress...
+
+However, in short, you can use this program for free;
+once the license is finalized, you will be able to distribute the program (under the same license).
+
+You are not allowed to commercialize this program without our approval.
+
+"""
 
