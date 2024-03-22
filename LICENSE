@@ -1,14 +1,16 @@
 """
-Copyright - Florent Autrusseau
-contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
 
-Florent.Autrusseau@univ-nantes.fr
-Rafic.Nader@univ-nantes.fr
+Copyright - ...
+
+contributor(s) : ., ... (February 2023)
+
+...
+...
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
 
-"INSERM Transfert" is currently working on the license to be applied to this computer program.
+Our Intellectual Property office is currently working on the license to be applied to this computer program.
 So, this is a work in progress...
 
 However, in short, you can use this program for free;
