@@ -93,7 +93,7 @@ buffer = np.zeros((data.shape[1], 12, data.shape[2]))
 dataStack1 = np.hstack((data, buffer))
 dataStack = np.hstack((dataStack1, data2))
 data = dataStack
-#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(data)), "/Users/florent/Desktop/stackDual.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(data)), "/Users/---/Desktop/stackDual.nrrd")
 
 
 ### Avoid display problems due to the presence of several colors in the stack,
@@ -101,8 +101,8 @@ data = dataStack
 #data[data>0] = 255
 
 """
-#data = tifffile.imread("/Users/florent/Desktop/mrbrain-8bit.tif")
-data = tifffile.imread("/Users/florent/Desktop/AIC_08_0247_012_TOF_3D_multi-slab_TH_AIC_z68_x196_y158.tif")
+#data = tifffile.imread("/Users/---/Desktop/mrbrain-8bit.tif")
+data = tifffile.imread("/Users/---/Desktop/AIC_08_0247_012_TOF_3D_multi-slab_TH_AIC_z68_x196_y158.tif")
 """
 
 """ 
@@ -110,7 +110,7 @@ data[data>0] = 1
 data2 = ndi.binary_dilation(data).astype(data.dtype)
 data2[data2>0] = 1
 data = data2 - data
-#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/---/Desktop/data.nrrd")
 """ 
 
 data = np.uint16(data.T *20.0)
