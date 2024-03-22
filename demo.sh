@@ -51,11 +51,11 @@ python model_rand_point_skel.py -i ${path}174.nii -seg ${pathSeg}174.seg.nii -st
 #export radius=6
 #export elasticStDev=1.0
 #export AGrowth=0.7
-#export path=/media/florent/LaCie/SubjDataset/InputImages/
-#export pathSeg=/media/florent/LaCie/SubjDataset/InputImages/
+#export path=/media/---/LaCie/SubjDataset/InputImages/
+#export pathSeg=/media/---/LaCie/SubjDataset/InputImages/
 
-export path=/home/florent/Bureau/images/
-export pathSeg=/home/florent/Bureau/images/
+export path=/home/---/Bureau/images/
+export pathSeg=/home/---/Bureau/images/
 
 python model_add_ICA_json_rand.py -i ${path}8.nii -seg ${pathSeg}8.seg.nii -j ${path}8.seg_F.mrk.json -f 1 -d3D 1
 python model_add_ICA_json_rand.py -i ${path}14.nii -seg ${pathSeg}14.seg.nii -j ${path}14.seg_F.mrk.json -f 6 -d3D 1
