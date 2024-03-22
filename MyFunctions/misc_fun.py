@@ -273,7 +273,7 @@ def Display_dual_3D(Model, GTruth):
 	Edges = Edges1 + Edges2 + Edges3 + Edges4 + Edges5 + Edges6
 	Edges[Edges>=2] = 255
 	Model[Edges==255] = 255
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(Model)), "/Users/florent/Desktop/Model.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(Model)), "/Users/---/Desktop/Model.nrrd")
 	"""
 
 	"""
@@ -281,7 +281,7 @@ def Display_dual_3D(Model, GTruth):
 	Model2 = ndi.binary_dilation(Model).astype(Model.dtype)
 	Model2[Model2>0] = 1
 	Model = Model2 - Model
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/---/Desktop/data.nrrd")
 	"""
 	Model = np.uint16(Model.T *20.0)
 
@@ -315,7 +315,7 @@ def Display_dual_3D(Model, GTruth):
 	GTruth2 = ndi.binary_dilation(GTruth).astype(GTruth.dtype)
 	GTruth2[GTruth2>0] = 1
 	GTruth = GTruth2 - GTruth
-	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/florent/Desktop/data.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.uint16(data)), "/Users/---/Desktop/data.nrrd")
 	"""
 	GTruth = np.uint16(GTruth.T *20.0)
 
