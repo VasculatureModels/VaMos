@@ -33,7 +33,6 @@ Csize= args["CropSize"]
 
 
 ''' Collect file names : '''
-#tof_name = '/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/74.nrrd'
 FileDir = os.path.dirname(os.path.abspath(tof_name)) + '/'
 FileName = os.path.splitext(os.path.basename(tof_name))[0]
 FileExt = os.path.splitext(os.path.basename(tof_name))[1]
