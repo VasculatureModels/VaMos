@@ -30,11 +30,11 @@ from MyFunctions.misc_fun import *
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/Users/florent//Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/---//Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg.nrrd',
 	help="Segmented input 3D image (stack)")
-ap.add_argument("-j", "--json", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg_F.mrk.json', 
+ap.add_argument("-j", "--json", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/3.seg_F.mrk.json', 
 	help="path for json file which contains the ground truth  the bif positions")
 ap.add_argument("-cs", "--CropSize", type=int, default=64,
 	help="Size of the 3D crops to grab around the point of interest")
