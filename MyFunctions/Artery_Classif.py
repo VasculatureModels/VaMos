@@ -30,11 +30,11 @@ from MyFunctions.misc_fun import *
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/home/florent/Images/MRA-Dataset/129.nii',
+ap.add_argument("-i", "--image", type=str, default='/home/---/Images/MRA-Dataset/129.nii',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='/home/florent/Images/MRA-Dataset/129.seg.nii',
+ap.add_argument("-seg", "--seg", type=str, default='/home/---/Images/MRA-Dataset/129.seg.nii',
 	help="Segmented input 3D image (stack)")
-ap.add_argument("-j", "--json", type=str, default='/home/florent/Images/MRA-Dataset/129.seg_F.mrk.json',
+ap.add_argument("-j", "--json", type=str, default='/home/---/Images/MRA-Dataset/129.seg_F.mrk.json',
     help="path for json file which contains the ground truth  the bif positions")
 
 args = vars(ap.parse_args())
