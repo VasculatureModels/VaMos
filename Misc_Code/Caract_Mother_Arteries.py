@@ -30,13 +30,13 @@ from MyFunctions.misc_fun import *
 ################################################################################################################################################
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/home/florent/Images/MRA-Dataset/85.nii',
+ap.add_argument("-i", "--image", type=str, default='/home/---/Images/MRA-Dataset/85.nii',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-lab", "--labels", type=str, default='/home/florent/Images/MRA-Dataset/85_labels.seg.nrrd',
+ap.add_argument("-lab", "--labels", type=str, default='/home/---/Images/MRA-Dataset/85_labels.seg.nrrd',
 	help="Labels 3D image (stack)")
-ap.add_argument("-j", "--json", type=str, default='/home/florent/Images/MRA-Dataset/85.seg_F.mrk.json',
+ap.add_argument("-j", "--json", type=str, default='/home/---/Images/MRA-Dataset/85.seg_F.mrk.json',
     help="json file containing the ground truth  the bif positions")
-ap.add_argument("-jl", "--jsonLab", type=str, default='/home/florent/Images/MRA-Dataset/85.seg_F_MothArt.mrk.json',
+ap.add_argument("-jl", "--jsonLab", type=str, default='/home/---/Images/MRA-Dataset/85.seg_F_MothArt.mrk.json',
     help="json file containing the mother arteries' positions")
 
 args = vars(ap.parse_args())
