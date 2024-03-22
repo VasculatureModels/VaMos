@@ -96,8 +96,6 @@ if fileextS == '.nii' or fileextS == '.mha' or fileextS == '.nrrd':
 	stackSegm = np.zeros((z,y,x))
 	for i in range(z):
 		stackSegm[i,:,:] = cv2.flip(cv2.rotate(stackSegm1[:,:,i], cv2.ROTATE_90_CLOCKWISE),2)
-	#sitk.WriteImage((sitk.GetImageFromArray(stackGray)),"/Users/florent/Desktop/gray.nrrd")
-	#sitk.WriteImage((sitk.GetImageFromArray(stackSegm)),"/Users/florent/Desktop/segm.nrrd")
 
 else:		   # Probably a DICOM folder...
 	reader2 = sitk.ImageSeriesReader()
@@ -181,7 +179,6 @@ for FidLabel in fid_label:
 	CropBif = stackGray[Zc - hcs:Zc + hcs, Yc - hcs:Yc + hcs, Xc - hcs:Xc + hcs]
 	CropSegm = stackSegm[Zc - hcs:Zc + hcs, Yc - hcs:Yc + hcs, Xc - hcs:Xc + hcs]
 
-	#sitk.WriteImage(sitk.GetImageFromArray(CropBif), "/Users/florent/Desktop/CropBif.nrrd")
 
 
 viewer = napari.view_image(CropBif)
