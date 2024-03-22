@@ -61,8 +61,8 @@ def rot_3d(image, x_center, y_center, z_center, axis, theta):
 
 
 
-#image = sitk.GetArrayFromImage(sitk.ReadImage("/Users/florent/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_107_F5/AIC_07_0259/AIC_07_0259_0.4.nrrd"))
-image = sitk.GetArrayFromImage(sitk.ReadImage("/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/7_Bif=5_Spl=2_R=4_Sed=2.0_AGr=1.0_ICA_Label.nrrd"))
+#image = sitk.GetArrayFromImage(sitk.ReadImage("/Users/---/ownCloud/NeuroVascu/ICAs/New_Dataset/loc_107_F5/AIC_07_0259/AIC_07_0259_0.4.nrrd"))
+image = sitk.GetArrayFromImage(sitk.ReadImage("/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/_ICA_Model/7_Bif=5_Spl=2_R=4_Sed=2.0_AGr=1.0_ICA_Label.nrrd"))
 x_center = image.shape[0]/2
 y_center = image.shape[1]/2
 z_center = image.shape[2]/2
@@ -73,4 +73,4 @@ theta = np.pi/4
 
 rot_img = rot_3d(image, x_center, y_center, z_center, axis, theta)
 
-sitk.WriteImage(sitk.GetImageFromArray(rot_img), "/Users/florent/Desktop/Rotated.nrrd")
+sitk.WriteImage(sitk.GetImageFromArray(rot_img), "/Users/---/Desktop/Rotated.nrrd")
