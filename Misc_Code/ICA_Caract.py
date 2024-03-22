@@ -113,7 +113,7 @@ cols=["Volume (nm^3)",
 stats = pd.DataFrame(data=stats_list, index=shape_stats.GetLabels(), columns=cols)
 stats.describe()
 
-#stats.to_excel("/Users/florent/Desktop/AIC.xlsx")
+#stats.to_excel("/Users/---/Desktop/AIC.xlsx")
 
 """
 dfVol = stats.iloc[0]['Volume (nm^3)']
