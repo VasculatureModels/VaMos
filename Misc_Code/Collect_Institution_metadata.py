@@ -17,7 +17,7 @@ for im in imnames:
 
 		dicom_files = glob("%s/*" %im_l2)
 
-		#filename = "/Users/florent/Downloads/dataset_florent/_DICOM/AIC_01_0174/308318/AIC_01_0174_20181128_TOF_3D_BIBLIO SIEMENS_1.2.840.113704.7.1.0.16723317255137249.1557758077.743.dcm"
+		#filename = "/Users/---/Downloads/dataset/_DICOM/AIC_01_0174/308318/AIC_01_0174_20181128_TOF_3D_BIBLIO SIEMENS_1.2.840.113704.7.1.0.16723317255137249.1557758077.743.dcm"
 		ds = pydicom.dcmread(dicom_files[0])
 		#elem = ds[0x0008, 0x0081]
 
