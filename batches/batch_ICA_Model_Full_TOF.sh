@@ -2,23 +2,21 @@
 
 #ComputerName=`scutil --get ComputerName | tr a-z A-Z`
 ComputerName=$(echo $HOSTNAME)
-#if [[ "$ComputerName" == "autrusseau.polytech.univ-nantes.prive" ]]
+#if [[ "$ComputerName" == "---.prive" ]]
 if [[ "$ComputerName" == "mb-odnt-10CML86.local" ]]
 then
     echo 'Using Laptop'
     export path=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
     export pathSeg=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
-elif [[ "$ComputerName" == "autrusseau.polytech.univ-nantes.prive" ]]
+elif [[ "$ComputerName" == "---.prive" ]]
 then
     echo "Using Laptop"
-    export path=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
-    export pathSeg=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
+    export path=/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
+    export pathSeg=/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
 else
     echo "Linux (?)"
-    #export path=/home/florent/Nextcloud/NeuroVascu/TOFs/50_TOFs/
-    #export pathSeg=/home/florent/Nextcloud/NeuroVascu/TOFs/50_TOFs/
-    export path=/media/florent/LaCie/SubjDataset/InputImages/
-    export pathSeg=/media/florent/LaCie/SubjDataset/InputImages/
+    export path=/media/---/LaCie/SubjDataset/InputImages/
+    export pathSeg=/media/---/LaCie/SubjDataset/InputImages/
 fi
 
 
