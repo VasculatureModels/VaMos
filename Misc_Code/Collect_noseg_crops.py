@@ -37,7 +37,7 @@ dist[z-32:z,:,:] = 0
 dist[:,y-32:y,:] = 0
 dist[:,:,x-32:x] = 0
 
-#sitk.WriteImage(sitk.GetImageFromArray(dist),"/Users/florent/Desktop/dist.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(dist),"/Users/---/Desktop/dist.nrrd")
 
 pos = np.where(dist > 64)
 
@@ -57,7 +57,7 @@ for i in range(N):
 
 	Crop = Stack[zp-32:zp+32, yp-32:yp+32, xp-32:xp+32]
 	if Crop.sum() > 0 :
-		sitk.WriteImage(sitk.GetImageFromArray(Crop), '/Users/florent/Desktop/noseg/' + FileNameNoExt + '_xyz=_'+ str(xp) + '_' + str(yp) + '_' + str(zp) + '_noseg.seg.nrrd')
+		sitk.WriteImage(sitk.GetImageFromArray(Crop), '/Users/---/Desktop/noseg/' + FileNameNoExt + '_xyz=_'+ str(xp) + '_' + str(yp) + '_' + str(zp) + '_noseg.seg.nrrd')
 		print(FileNameNoExt + '_xyz=_'+ str(xp) + '_' + str(yp) + '_' + str(zp) + '_noseg.seg.nrrd' + '\t' + str(Crop.sum()))
 
 
