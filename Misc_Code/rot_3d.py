@@ -72,4 +72,4 @@ theta = np.pi/4
 
 rot_img = rot_3d(image, x_center, y_center, z_center, axis, theta)
 
-sitk.WriteImage(sitk.GetImageFromArray(rot_img), "/Users/florent/Desktop/Rotated.nrrd")
+sitk.WriteImage(sitk.GetImageFromArray(rot_img), "/Users/---/Desktop/Rotated.nrrd")
