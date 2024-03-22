@@ -270,12 +270,12 @@ def Embed_AIC_Bin(Coords_BranchM, Coords_BranchD1, Coords_BranchD2, BifCoords, B
 	#AICArr = Make_Sphere(xs, ys, zs, xa, ya, za, radius, sigmaED)
 	AICArr = Make_Sphere_NoED(xs, ys, zs, xa, ya, za, radius)
 
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/florent/Desktop/AICArr_Orig.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/---/Desktop/AICArr_Orig.nrrd")
 
 	#if radius > 3:
 	#	AICArrThromb = Make_Sphere(xs, ys, zs, xa, ya, za, radius/2., sigmaED)
 	#	AICArr = AICArr - AICArrThromb
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/florent/Desktop/AICArr.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/---/Desktop/AICArr.nrrd")
 
 	#AICArr = elasticdeform.deform_random_grid(AICArr, sigma=sigmaED, points=5)
 	if sigmaED != 0:
@@ -293,7 +293,7 @@ def Embed_AIC_Bin(Coords_BranchM, Coords_BranchD1, Coords_BranchD2, BifCoords, B
 
 	AICArr = np.abs(AICArr)
 	AICArr[AICArr<0.1] = 0
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/florent/Desktop/AICArr_Deformed.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/---/Desktop/AICArr_Deformed.nrrd")
 
 	''' 
 		Add Thrombosis within the ICA: 
@@ -318,7 +318,7 @@ def Embed_AIC_Bin(Coords_BranchM, Coords_BranchD1, Coords_BranchD2, BifCoords, B
 			Thromb = np.roll(Thromb, (ShY, 0), axis=(0, 1))
 		else:
 			Thromb = np.ones(AICArr.shape)
-			#sitk.WriteImage(sitk.GetImageFromArray(Thromb),"/Users/florent/Desktop/Thrombosis.nrrd")
+			#sitk.WriteImage(sitk.GetImageFromArray(Thromb),"/Users/---/Desktop/Thrombosis.nrrd")
 	else:
 		Thromb = np.ones(AICArr.shape)
 	""" """
@@ -326,7 +326,7 @@ def Embed_AIC_Bin(Coords_BranchM, Coords_BranchD1, Coords_BranchD2, BifCoords, B
 
 	AICArr = np.float32(ndimage.binary_closing(AICArr))
 
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/florent/Desktop/AICArr_Before_Shift.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/---/Desktop/AICArr_Before_Shift.nrrd")
 	'''
 		Shifting the ICA back to where it belongs within the 3D Crop ! (coordinates (xa, ya, za))
 	'''
@@ -351,10 +351,10 @@ def Embed_AIC_Bin(Coords_BranchM, Coords_BranchD1, Coords_BranchD2, BifCoords, B
 	AICArr_Centered = np.roll(AICArr_Centered, int(Dy_Centroid), axis=1)
 	AICArr_Centered = np.roll(AICArr_Centered, int(Dz_Centroid), axis=2)
 	AICArr = AICArr_Centered
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/florent/Desktop/AICArr_Shifted.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr), "/Users/---/Desktop/AICArr_Shifted.nrrd")
 
 
-	#sitk.WriteImage(sitk.GetImageFromArray(AICArr),"/Users/florent/Desktop/AICArr.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(AICArr),"/Users/---/Desktop/AICArr.nrrd")
 
 	#### Adding AIC on top of the bifurcation : ####
 	VascuArr = np.copy(BinCrop)
