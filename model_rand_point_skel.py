@@ -23,26 +23,6 @@
 '''
 
 
-#import cv2
-#import sknw
-#import random
-#import argparse
-#import skimage.io
-#import numpy as np
-#import skimage.util
-#from mayavi import mlab
-#import SimpleITK as sitk
-#from copy import deepcopy
-#from decimal import Decimal
-#import scipy.ndimage as ndi
-#from scipy import interpolate
-#from scipy.ndimage import zoom
-#import matplotlib.pyplot as plt
-#from mpl_toolkits.mplot3d import Axes3D
-#from scipy.ndimage import gaussian_filter
-#from skimage.morphology import skeletonize_3d
-#from skimage.filters import threshold_multiotsu
-#import sys, os, glob, platform
 import napari
 
 ''' 
@@ -73,10 +53,10 @@ RandPoint_Or_xyz = 1  # if == 1 : Random Point Along centerlines / if == 2 : pro
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-#ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
-ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
+#ap.add_argument("-i", "--image", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/55.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-str", "--SplineStr", type=str, default='8',
 	help="Strength of the spline modification (10 to 30)")
