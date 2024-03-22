@@ -8,7 +8,7 @@ from MyFunctions.misc_fun import *
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-s", "--seg", type=str, default='/Users/florent/Code/vamos/Sample_TOFs/12/12.seg.nrrd',
+ap.add_argument("-s", "--seg", type=str, default='/Users/---/Code/vamos/Sample_TOFs/12/12.seg.nrrd',
 	help="Input 3D binary image (stack) (.nrrd, .nii or .mha)")
 
 
