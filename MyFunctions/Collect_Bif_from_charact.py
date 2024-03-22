@@ -18,7 +18,7 @@ from MyFunctions.bif_geom_model import *
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/55.nrrd', #required=True,
+ap.add_argument("-i", "--image", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_tof/training_BET/55.nrrd', #required=True,
     help="path input 3D image (stack) (.dcm or .nii or .mha or .nrrd) ")
 ap.add_argument("-cs", "--CropSize", type=int, default=64,
     help="Desired size for the cropped stacks")
