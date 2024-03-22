@@ -19,13 +19,9 @@ else
     export pathSeg=/home/data/Datasets/CNN_Bif_DataSet_ManualSegm/
 fi
 
-# Tests : 
-#export path=/Users/----/Nextcloud/NeuroVascu/TOFs/CNN_Dataset/Quelques_TOFs_pour_tests/
-# TOFs 1, 3, 4, 5, 8, 12
 
 alias python=python3.9
 export SigSt=3
-#export strSpl=2
 
 for i in {1..25}
   do
