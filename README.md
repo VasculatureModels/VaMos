@@ -78,6 +78,8 @@ The following python packages should be installed :
 
 ## Authors and acknowledgment
 
+(Anonymous repository for now: This work has been submitted to an international conference, with a double-blind review process)
+
 ...
 
 ...
