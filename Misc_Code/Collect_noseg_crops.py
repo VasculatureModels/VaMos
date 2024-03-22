@@ -9,8 +9,8 @@ from scipy.ndimage import distance_transform_edt
 
 N = 30
 
-#inputname = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/3.nrrd"
-#inputnameS = "/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/3.seg.nrrd"
+#inputname = "/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/3.nrrd"
+#inputnameS = "/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/3.seg.nrrd"
 
 inputname = sys.argv[1]
 inputnameS = sys.argv[1]
