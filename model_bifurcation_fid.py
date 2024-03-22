@@ -138,7 +138,7 @@ if fileext == '.nii' or fileext == '.mha' or fileext == '.nrrd':
 	stackSegm = sitk.GetArrayFromImage(sitkimgSegm)
 
 	#stackSegm2 = maxEntropyTh(stackGray)
-	#sitk.WriteImage(sitk.GetImageFromArray(stackSegm2),"/Users/florent/Desktop/segmEntropy.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(stackSegm2),"/Users/---/Desktop/segmEntropy.nrrd")
 
 	#stackGray = np.copy(stack)
 	#if stack.min() < 0:
@@ -191,7 +191,7 @@ if x != xG or y != yG or z != zG :
 """
 CropCoords, CropOrig, CroppedSegm, SplineModelTOF = geometric_model(stackGray, stackSegm, BifNum, SplineStr, CropSize, ShowPlot, RandPoint)
 
-#sitk.WriteImage(sitk.GetImageFromArray(SplineModelTOF), "/Users/florent/desktop/SplineModelTOF.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(SplineModelTOF), "/Users/---/desktop/SplineModelTOF.nrrd")
 
 """
 	Generating the adapted background noise :
