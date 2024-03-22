@@ -39,10 +39,10 @@ from MyFunctions.bif_geom_model import *
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-#ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
-ap.add_argument("-i", "--image", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/3.nrrd',
+#ap.add_argument("-i", "--image", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/17.nrrd',
+ap.add_argument("-i", "--image", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_TOF/training_BET/3.nrrd',
 	help="Input 3D image (stack) (.nrrd, .nii or .mha)")
-ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/3.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/3.nrrd',
 	help="Segmented input 3D image (stack)")
 ap.add_argument("-bn", "--BifNum", type=str, default='28',
 	help="Position of the bifurcation in the list of bifurcs from the 3D graph")
