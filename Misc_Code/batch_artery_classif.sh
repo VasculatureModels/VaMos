@@ -1,5 +1,5 @@
-#export impath="/home/florent/Images/MRA-Dataset/"
-export impath="/home/florent/DataSets/148_TOFs_0.4_nii/"
+#export impath="/home/---/Images/MRA-Dataset/"
+export impath="/home/---/DataSets/148_TOFs_0.4_nii/"
 
 python3 Artery_Classif.py -i ${impath}/0.nii -seg ${impath}/0.seg.nii -j ${impath}/0.seg_F.mrk.json
 python3 Artery_Classif.py -i ${impath}/1.nii -seg ${impath}/1.seg.nii -j ${impath}/1.seg_F.mrk.json
