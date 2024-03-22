@@ -45,10 +45,10 @@ def ICA_noise_generator(SplineModelTOF, CropOrig):
 	BrighterMatter[BrighterMatter >= thOtsu[1]] = 1
 	#BrighterMatter[BrighterMatter != 0] = 1
 
-	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(DarkMatter)), "/Users/florent/Desktop/DarkMatter.nrrd")
-	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(GrayMatter)), "/Users/florent/Desktop/GrayMatter.nrrd")
-	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(BrightMatter)), "/Users/florent/Desktop/BrightMatter.nrrd")
-	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(BrighterMatter)), "/Users/florent/Desktop/BrighterMatter.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(DarkMatter)), "/Users/---/Desktop/DarkMatter.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(GrayMatter)), "/Users/---/Desktop/GrayMatter.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(BrightMatter)), "/Users/---/Desktop/BrightMatter.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(BrighterMatter)), "/Users/---/Desktop/BrighterMatter.nrrd")
 
 	'''
 		Collect the averages and standard deviations within those portions :
