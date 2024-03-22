@@ -22,8 +22,8 @@ def draw3d_mayavi(array, path):
 #
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-#ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
-ap.add_argument("-seg", "--seg", type=str, default='/Users/florent/Desktop/55.nrrd',
+#ap.add_argument("-seg", "--seg", type=str, default='/Users/---/Nextcloud/NeuroVascu/TOFs/Manual_Segm/nrrd_mask/training_BET/55.nrrd',
+ap.add_argument("-seg", "--seg", type=str, default='/Users/---/Desktop/55.nrrd',
 	help="Segmented input 3D image (stack)")
 args = vars(ap.parse_args())
 
