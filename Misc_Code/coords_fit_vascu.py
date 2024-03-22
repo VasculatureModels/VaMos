@@ -157,7 +157,7 @@ if stackGray.min() > 20000:
 	stackGrayN = np.zeros(stackGray.shape, dtype=np.uint8)
 	tmp = (stackGray - stackGray.min()) / (stackGray.max()-stackGray.min())
 	stackGrayN = np.uint8(tmp*255)
-	sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackGrayN)), "/Users/florent/Desktop/stackGrayN.nrrd")
+	sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackGrayN)), "/Users/---/Desktop/stackGrayN.nrrd")
 	stackGray = np.copy(stackGrayN)
 elif stackGray.max() < 0:
 	stackp = stack + np.abs(stack.min())
