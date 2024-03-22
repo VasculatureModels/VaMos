@@ -78,25 +78,25 @@ The following python packages should be installed :
 
 ## Authors and acknowledgment
 
-Florent Autrusseau: Florent.Autrusseau@univ-nantes.fr
+...
 
-Rafic Nader: Rafic.Nader@univ-nantes.fr
+...
 
 
 
 ## License
 
 """
-Copyright - Florent Autrusseau
-contributor(s) : Florent Autrusseau, Rafic Nader (February 2023)
+Copyright - ...
+contributor(s) : ..., ... (February 2023)
 
-Florent.Autrusseau@univ-nantes.fr
-Rafic.Nader@univ-nantes.fr
+...
+...
 
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
 
-"INSERM Transfert" is currently working on the license to be applied to this computer program.
+Our IP office is currently working on the license to be applied to this computer program.
 So, this is a work in progress...
 
 However, in short, you can use this program for free;
