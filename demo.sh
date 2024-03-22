@@ -1,7 +1,7 @@
 
 set_PATHS
-export path=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
-export pathSeg=/Users/florent/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
+export path=/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
+export pathSeg=/Users/---/ownCloud/NeuroVascu/TOF_Dataset_Spacing_0.4/
 alias python=python3.9
 export SigSt=4
 export radius=4
@@ -10,8 +10,8 @@ export elasticStDev=2.0
 export AGrowth=1.0
 export d3D=1
 
-export path=/home/florent/Bureau/images/
-export pathSeg=/home/florent/Bureau/images/
+export path=/home/---/Bureau/images/
+export pathSeg=/home/---/Bureau/images/
 
 
 #################################
