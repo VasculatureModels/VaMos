@@ -3,7 +3,7 @@ import numpy as np
 import os, glob
 
 
-imnames = sorted(glob.glob("/home/florent/Images/MRA-Dataset/*labels*"))
+imnames = sorted(glob.glob("/home/---/Images/MRA-Dataset/*labels*"))
 
 for imname in imnames :
     sitk_labels = sitk.ReadImage(imname)
