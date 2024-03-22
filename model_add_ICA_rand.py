@@ -227,7 +227,7 @@ if AddICA == 1:
 	ICATrueBif2 = np.maximum(ICATrueBif, ICAOnly)
 
 	[Grad3Dx, Grad3Dy, Grad3Dz] = np.gradient(ICATrueBif2, -1, -1, -1)
-	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Grad3Dx)), "/Users/florent/Desktop/gx.nrrd")
+	#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Grad3Dx)), "/Users/---/Desktop/gx.nrrd")
 
 	ring = ndimage.binary_erosion(ICA_Arr).astype(ICA_Arr.dtype)
 	ring = ICA_Arr - ring
@@ -242,7 +242,7 @@ if AddICA == 1:
 
 	ring = ringD - ringE
 	ringB = gaussian_filter(ring, sigma=1.0)
-	sitk.WriteImage(sitk.GetImageFromArray(ringB),"/Users/florent/Desktop/ringB.nrrd")
+	sitk.WriteImage(sitk.GetImageFromArray(ringB),"/Users/---/Desktop/ringB.nrrd")
 	ringB = (ringB * 0.1 / ringB.max()) + 1
 	ICATrueBif2 = ICATrueBif2 * ringB
 	#img = sitk.GetArrayFromImage(sitk.ReadImage("img.nrrd"))
