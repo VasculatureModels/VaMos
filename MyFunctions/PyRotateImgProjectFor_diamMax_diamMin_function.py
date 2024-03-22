@@ -28,8 +28,7 @@ def diamMinMax(image ):
         #cv2.imshow("Rotated", rotated)
         #cv2.waitKey(0)
 
-    #lenProj = np.zeros((180/1)) #Florent
-    lenProj = np.zeros((180)) #Anass
+    lenProj = np.zeros((180))
     for i in range(len(proj)):
         p = proj[i]
         p[p>0]=1
