@@ -91,14 +91,14 @@ Hollow_ICA = np.copy(Dist)
 Sph = binary_dilation(Sph).astype(Sph.dtype)
 Hollow_ICA[Sph > 0] = 0
 
-#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Hollow_ICA)), "/Users/florent/Desktop/Hollow_ICA.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.float32(Hollow_ICA)), "/Users/---/Desktop/Hollow_ICA.nrrd")
 
 """
 BinHollow_ICA = np.copy(Hollow_ICA)
 BinHollow_ICA[BinHollow_ICA > 0] = 1
 
 DistHollow = distance_transform_cdt(BinHollow_ICA)
-sitk.WriteImage(sitk.GetImageFromArray(np.float32(DistHollow)), "/Users/florent/Desktop/DistHollow.nrrd")
+sitk.WriteImage(sitk.GetImageFromArray(np.float32(DistHollow)), "/Users/---/Desktop/DistHollow.nrrd")
 """
 
 print("\nDistance from sphere : " +str(Hollow_ICA.sum()))
