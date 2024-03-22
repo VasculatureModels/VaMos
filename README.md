@@ -88,6 +88,7 @@ The following python packages should be installed :
 
 """
 Copyright - ...
+
 contributor(s) : ..., ... (February 2023)
 
 ...
@@ -96,7 +97,7 @@ contributor(s) : ..., ... (February 2023)
 This software is a computer program whose purpose is to detect cerebral
 vascular tree bifurcations within MRA-TOF acquisitions.
 
-Our IP office is currently working on the license to be applied to this computer program.
+Our Intellectual Property office is currently working on the license to be applied to this computer program.
 So, this is a work in progress...
 
 However, in short, you can use this program for free;
