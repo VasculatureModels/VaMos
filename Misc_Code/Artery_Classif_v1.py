@@ -130,7 +130,7 @@ for idx in range(len(coords_gt_bif)):
 	z0 = int(coords_gt_bif[idx][2])
 	Sph = Make_Sphere_NoED(x, y, z, x0, y0, z0, r)
 	stackSegm[Sph>0] = 0
-#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackSegm)),"/home/florent/Bureau/tmp2.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(stackSegm)),"/home/---/Bureau/tmp2.nrrd")
 '''
 
 
@@ -143,7 +143,7 @@ hw = int(w/2)
 Blk[hw,:,:] = 1
 Blk[:,hw,:] = 1
 Blk[:,:,hw] = 1
-#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(Blk*255)),"/home/florent/Bureau/tmp.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(Blk*255)),"/home/---/Bureau/tmp.nrrd")
 
 FidImg = np.zeros(stackSegm.shape)
 
@@ -151,7 +151,7 @@ for coords in coords_gt_bif:
 	FidImg[coords[2], coords[1], coords[0]] = 1
 
 Eraser = ndimage.convolve(FidImg, Blk, mode='reflect', cval=0.0)
-#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(Eraser*255)),"/home/florent/Bureau/tmp.nrrd")
+#sitk.WriteImage(sitk.GetImageFromArray(np.uint8(Eraser*255)),"/home/---/Bureau/tmp.nrrd")
 
 stackSegm[Eraser==1]= 0
 
@@ -162,7 +162,7 @@ stackSegm[Eraser==1]= 0
 	Watershed : Get the distance maps, the seeds, etc.
 """
 dist_img = sitk.SignedMaurerDistanceMap(sitk.GetImageFromArray(stackSegm) != 0, insideIsPositive=False, squaredDistance=False, useImageSpacing=False)
-#sitk.WriteImage(dist_img, "/home/florent/Bureau/dist_img.nrrd")
+#sitk.WriteImage(dist_img, "/home/---/Bureau/dist_img.nrrd")
 
 radius = 0
 # Seeds have a distance of "radius" or more to the object boundary, they are uniquely labelled.
